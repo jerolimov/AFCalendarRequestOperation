@@ -20,10 +20,15 @@
 
 #import "AFCalenderClientTests.h"
 
+#import "AFCalenderClient.h"
+
 @implementation AFCalenderClientTests
 
 - (void)testExample {
-//	STFail(@"Unit tests are not implemented yet in AFCalenderClientTests");
+	// TODO baseUrl + "/" + german__de%40holiday.calendar.google.com/public/basic.ics
+	NSURL* baseURL = [NSURL URLWithString:@"https://www.google.com/calendar/ical"];
+	AFCalenderClient* client = [[AFCalenderClient alloc] initWithBaseURL:baseURL];
+	STAssertNotNil(client, @"May not be nil");
 }
 
 @end

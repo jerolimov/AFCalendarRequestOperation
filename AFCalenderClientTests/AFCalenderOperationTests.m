@@ -18,8 +18,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "AFHTTPClient.h"
+#import "AFCalenderOperationTests.h"
 
-@interface AFCalenderClient : AFHTTPClient
+#import "AFCalenderOperation.h"
+
+@implementation AFCalenderOperationTests
+
+- (void)testExample {
+	AFCalenderOperation* operation = [[AFCalenderOperation alloc] init];
+	STAssertNotNil(operation, @"May not be nil");
+}
 
 @end

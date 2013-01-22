@@ -18,8 +18,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "AFHTTPClient.h"
+#import "AFCalenderOperation.h"
 
-@interface AFCalenderClient : AFHTTPClient
+@implementation AFCalenderOperation
+
+// TODO
 
 @end
