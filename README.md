@@ -5,6 +5,21 @@ extension for downloading and parsing iCal calendars.
 
 If you need to read other calender formats please add an issue for that.
 
+## Status
+
+Done:
+
+* General calender parsing into a simple model, see AFCalenderModel.h
+* Parsing of different date formats into NSDate
+* Tests for thats
+
+Missing:
+
+* Support for events in a sequence
+* Implement comperator to simple sort the events
+* AFNetworking client integration
+* AFNetworking operation integration
+
 ## Usage (not implemented yet!)
 
     NSURL* url = [NSURL URLWithString:@"https://www.google.com/calendar/ical/german__de%40holiday.calendar.google.com/public/basic.ics"];
