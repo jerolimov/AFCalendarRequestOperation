@@ -61,6 +61,7 @@
 		592FB26316B2909A0039214C /* AFCalender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFCalender.h; sourceTree = "<group>"; };
 		592FB26716B290F00039214C /* AFCalenderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFCalenderModel.h; sourceTree = "<group>"; };
 		592FB26816B290F00039214C /* AFCalenderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFCalenderModel.m; sourceTree = "<group>"; };
+		594BDF2716B2DFBB00328E41 /* AFCalenderClient.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = AFCalenderClient.podspec; sourceTree = "<group>"; };
 		599C230316AEA8C1001E4F16 /* AFCalenderClient.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = AFCalenderClient.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		599C230616AEA8C1001E4F16 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		599C230916AEA8C1001E4F16 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -126,9 +127,10 @@
 			children = (
 				599C233816AEAB10001E4F16 /* README.md */,
 				599C233A16AEAB17001E4F16 /* LICENSE.txt */,
-				599C235E16AEAD00001E4F16 /* AFNetworking */,
+				594BDF2716B2DFBB00328E41 /* AFCalenderClient.podspec */,
 				599C230C16AEA8C1001E4F16 /* AFCalenderClient */,
 				599C231E16AEA8C2001E4F16 /* AFCalenderClientTests */,
+				599C235E16AEAD00001E4F16 /* AFNetworking */,
 				599C230516AEA8C1001E4F16 /* Frameworks */,
 				599C230416AEA8C1001E4F16 /* Products */,
 			);
