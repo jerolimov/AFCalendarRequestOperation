@@ -12,27 +12,32 @@ Done:
 * General calender parsing into a simple model, see AFCalenderModel.h
 * Parsing of different date formats into NSDate
 * Tests for thats
+* AFNetworking client integration
+* AFNetworking operation integration
 
 Missing:
 
 * Support for events in a sequence
 * Implement comperator to simple sort the events
-* AFNetworking client integration
-* AFNetworking operation integration
 
-## Usage (not implemented yet!)
+## Usage with AFCalenderClient (extends AFHTTPClient)
 
-    NSURL* url = [NSURL URLWithString:@"https://www.google.com/calendar/ical/german__de%40holiday.calendar.google.com/public/basic.ics"];
-    NSURLRequest* request = [NSURLRequest requestWithURL:url];
-    AFJSONRequestOperation* operation = [AFCalenderOperation calenderOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id todo) {
-	    
+    NSURL* calenderBaseUrl = [NSURL URLWithString:@"https://www.google.com/calendar"];
+    AFHTTPClient* client = [[AFCalenderClient alloc] initWithBaseURL:calenderBaseUrl];
+    NSURLRequest* request = [client requestWithMethod:@"GET"
+                                                 path:@"ical/german__de%40holiday.calendar.google.com/public/basic.ics"
+										   parameters:nil];
 
-    } failure:nil];
-    [operation start];
+    AFHTTPRequestOperation* operation = [client HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, AFCalender calender) {
+	
+		NSLog(@"Calender: %@", calender);
+		NSLog(@"Events: %@", calender.events);
 
-or
+	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 
-    todo simplified call with an AFCalenderClient
+		NSLog(@"Error: %@", error);
+
+	}]
 
 ## How to constribute
 
