@@ -22,4 +22,10 @@
 
 @interface AFCalenderClient : AFHTTPClient
 
+/**
+ Call super init method, register the AFCalenderOperation and set the default
+ "Accept" header to "text/calender".
+ */
+- (id)initWithBaseURL:(NSURL *)url;
+
 @end

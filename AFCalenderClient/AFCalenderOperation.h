@@ -20,6 +20,10 @@
 
 #import "AFHTTPRequestOperation.h"
 
+#import "AFCalenderModel.h"
+
 @interface AFCalenderOperation : AFHTTPRequestOperation
+
+@property (strong) AFCalender* calender;
 
 @end

@@ -20,15 +20,43 @@
 
 #import "AFCalenderClientTests.h"
 
+#import "AFHTTPRequestOperation.h"
+
 #import "AFCalenderClient.h"
+#import "AFCalenderOperation.h"
 
 @implementation AFCalenderClientTests
 
-- (void)testExample {
-	// TODO baseUrl + "/" + german__de%40holiday.calendar.google.com/public/basic.ics
-	NSURL* baseURL = [NSURL URLWithString:@"https://www.google.com/calendar/ical"];
-	AFCalenderClient* client = [[AFCalenderClient alloc] initWithBaseURL:baseURL];
-	STAssertNotNil(client, @"May not be nil");
+/**
+ Test autodetection of the HTTPRequestOperation class based on the pat suffix
+ ".ics".
+ */
+- (void) testGoogleGermanHolidayCalenderUrl {
+	NSURL* calenderBaseUrl = [NSURL URLWithString:@"https://www.google.com/calendar"];
+	AFCalenderClient* client = [[AFCalenderClient alloc] initWithBaseURL:calenderBaseUrl];
+	NSURLRequest* request = [client requestWithMethod:@"GET"
+												 path:@"ical/german__de%40holiday.calendar.google.com/public/basic.ics"
+										   parameters:nil];
+	
+	AFHTTPRequestOperation* operation = [client HTTPRequestOperationWithRequest:request success:nil failure:nil];
+	
+	STAssertEqualObjects(NSStringFromClass(operation.class), NSStringFromClass(AFCalenderOperation.class), @"Unexpected class");
+}
+
+/**
+ Test if all other urls will also automatically use the AFCalenderOperation
+ because we set the Accept header to "text/calender".
+ */
+- (void) testUniversityOfAppliedSciencesCologneCalenderUrl {
+	NSURL* calenderBaseUrl = [NSURL URLWithString:@"http://advbs06.gm.fh-koeln.de:8080/icalender"];
+	AFHTTPClient* client = [[AFCalenderClient alloc] initWithBaseURL:calenderBaseUrl];
+	NSURLRequest* request = [client requestWithMethod:@"GET"
+												 path:@"ical"
+										   parameters:@{ @"sqlabfrage": @"null is null" }];
+	
+	AFHTTPRequestOperation* operation = [client HTTPRequestOperationWithRequest:request success:nil failure:nil];
+	
+	STAssertEqualObjects(NSStringFromClass(operation.class), NSStringFromClass(AFCalenderOperation.class), @"Unexpected class");
 }
 
 @end
