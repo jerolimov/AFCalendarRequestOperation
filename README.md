@@ -3,23 +3,6 @@
 AFCalenderClient is a [AFNetworking](https://github.com/AFNetworking/AFNetworking)
 extension for downloading and parsing iCal calendars.
 
-If you need to read other calender formats please add an issue for that.
-
-## Status
-
-Done:
-
-* General calender parsing into a simple model, see AFCalenderModel.h
-* Parsing of different date formats into NSDate
-* Tests for thats
-* AFNetworking client integration
-* AFNetworking operation integration
-
-Missing:
-
-* Support for events in a sequence
-* Implement comperator to simple sort the events
-
 ## Usage with AFCalenderClient (extends AFHTTPClient)
 
 ``` objective-c
@@ -52,6 +35,18 @@ AFCalenderOperation* operation = [[AFCalenderOperation alloc] initWithRequest:ca
 AFHTTPClient* anyHttpClient = ...;
 [anyHttpClient enqueueHTTPRequestOperation:calenderOperation];
 ```
+
+## Status
+
+* General calender parsing into a simple model, see AFCalenderModel.h
+  If you want read another calender format please constribute it or add an issue for that.
+* Parsing of different date formats into NSDate
+* Unit tests for all classes
+
+Open todos:
+
+* Support for events in a sequence
+* Implement comperator to simple sort the events
 
 ## How to constribute
 
