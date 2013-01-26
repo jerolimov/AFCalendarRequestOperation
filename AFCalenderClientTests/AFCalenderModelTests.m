@@ -18,34 +18,31 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#import "AFCalenderModelTests.h"
+
 #import "AFCalenderModel.h"
 
-@implementation AFCalender
-- (NSMutableArray*) events {
-	if (!_events) {
-		_events = [NSMutableArray array];
-	}
-	return _events;
-}
-@end
+@implementation AFCalenderModelTests
 
-@implementation AFCalenderEvent
-- (NSTimeInterval) duration {
-	if (_start && _end) {
-		return [_end timeIntervalSinceDate:_start];
-	} else {
-		return 0;
-	}
+- (void) testCompareWithArray {
+	AFCalenderEvent* event1 = [[AFCalenderEvent alloc] init];
+	event1.start = [NSDate dateWithString:@"2013-01-01 00:00:00 +0000"];
+	AFCalenderEvent* event2 = [[AFCalenderEvent alloc] init];
+	event2.start = [NSDate dateWithString:@"2013-01-02 00:00:00 +0000"];
+	
+	NSMutableArray* array;
+	
+	array = [NSMutableArray arrayWithObjects:event1, event2, nil];
+	[array sortUsingSelector:@selector(compare:)];
+	
+	STAssertEquals([array objectAtIndex:0], event1, @"Unexpected event at position 0.");
+	STAssertEquals([array objectAtIndex:1], event2, @"Unexpected event at position 1.");
+	
+	array = [NSMutableArray arrayWithObjects:event2, event1, nil];
+	[array sortUsingSelector:@selector(compare:)];
+	
+	STAssertEquals([array objectAtIndex:0], event1, @"Unexpected event at position 0.");
+	STAssertEquals([array objectAtIndex:1], event2, @"Unexpected event at position 1.");
 }
-- (NSComparisonResult)compare:(AFCalenderEvent*) other {
-	if (self.start && other.start) {
-		return [self.start compare:other.start];
-	} else if (!self.start && !other.start) {
-		return NSOrderedSame;
-	} else if (!self.start && other.start) {
-		return NSOrderedAscending;
-	} else { // self.start && !other.start
-		return NSOrderedDescending;
-	}
-}
+
 @end

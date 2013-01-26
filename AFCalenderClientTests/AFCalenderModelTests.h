@@ -18,34 +18,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "AFCalenderModel.h"
+#import <SenTestingKit/SenTestingKit.h>
 
-@implementation AFCalender
-- (NSMutableArray*) events {
-	if (!_events) {
-		_events = [NSMutableArray array];
-	}
-	return _events;
-}
-@end
+@interface AFCalenderModelTests : SenTestCase
 
-@implementation AFCalenderEvent
-- (NSTimeInterval) duration {
-	if (_start && _end) {
-		return [_end timeIntervalSinceDate:_start];
-	} else {
-		return 0;
-	}
-}
-- (NSComparisonResult)compare:(AFCalenderEvent*) other {
-	if (self.start && other.start) {
-		return [self.start compare:other.start];
-	} else if (!self.start && !other.start) {
-		return NSOrderedSame;
-	} else if (!self.start && other.start) {
-		return NSOrderedAscending;
-	} else { // self.start && !other.start
-		return NSOrderedDescending;
-	}
-}
 @end
