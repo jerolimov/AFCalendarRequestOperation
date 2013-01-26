@@ -22,47 +22,36 @@ Missing:
 
 ## Usage with AFCalenderClient (extends AFHTTPClient)
 
-    NSURL* calenderBaseUrl = [NSURL URLWithString:@"https://www.google.com/calendar"];
-    AFHTTPClient* calenderClient = [[AFCalenderClient alloc] initWithBaseURL:calenderBaseUrl];
-    
-    NSURLRequest* calenderRequest = [client requestWithMethod:@"GET"
-                                                 path:@"ical/german__de%40holiday.calendar.google.com/public/basic.ics"
-                                                 parameters:nil];
-    
-    AFHTTPRequestOperation* calenderOperation = [calenderClient HTTPRequestOperationWithRequest:calenderRequest
-        success:^(AFHTTPRequestOperation* operation, AFCalender* calender) {
-        
-        NSLog(@"Calender: %@", calender);
-        NSLog(@"Events: %@", calender.events);
-        
-    } failure:^(AFHTTPRequestOperation* operation, NSError* error) {
-        
-        NSLog(@"Error: %@", error);
-        
-    }]
-    [calenderClient enqueueHTTPRequestOperation:calenderOperation];
+``` objective-c
+AFHTTPClient* calenderClient = [[AFCalenderClient alloc] initWithBaseURL:[NSURL URLWithString:@"https://www.google.com/calendar"]];
+NSURLRequest* calenderRequest = [client requestWithMethod:@"GET" path:@"ical/german__de%40holiday.calendar.google.com/public/basic.ics" parameters:nil];
+
+AFHTTPRequestOperation* calenderOperation = [calenderClient HTTPRequestOperationWithRequest:calenderRequest success:^(AFHTTPRequestOperation* operation, AFCalender* calender) {
+	NSLog(@"Calender: %@", calender);
+	NSLog(@"Events: %@", calender.events);
+} failure:^(AFHTTPRequestOperation* operation, NSError* error) {
+	NSLog(@"Error: %@", error);
+}]
+[calenderClient enqueueHTTPRequestOperation:calenderOperation];
+```
 
 ## Use AFHTTPClient and AFCalenderOperation directly
 
-    NSURL* calendereUrl = [NSURL URLWithString:
-        @"https://www.google.com/calendar/ical/german__de%40holiday.calendar.google.com/public/basic.ics"];
-    NSURLRequest* calenderRequest = [NSURLRequest requestWithURL:calenderUrl];
-    
-    AFCalenderOperation* operation = [[AFCalenderOperation alloc] initWithRequest:calenderRequest];
-    [operation setCompletionBlockWithSuccess:
-        ^(AFHTTPRequestOperation* operation, AFCalender* calender) {
-        
-        NSLog(@"Calender: %@", calender);
-        NSLog(@"Events: %@", calender.events);
-        
-    } failure:^(AFHTTPRequestOperation* operation, NSError* error) {
-        
-        NSLog(@"Error: %@", error);
-        
-    }]
-    
-    AFHTTPClient* anyHttpClient = ...;
-    [anyHttpClient enqueueHTTPRequestOperation:calenderOperation];
+``` objective-c
+NSURL* calendereUrl = [NSURL URLWithString:@"https://www.google.com/calendar/ical/german__de%40holiday.calendar.google.com/public/basic.ics"];
+NSURLRequest* calenderRequest = [NSURLRequest requestWithURL:calenderUrl];
+
+AFCalenderOperation* operation = [[AFCalenderOperation alloc] initWithRequest:calenderRequest];
+[operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation* operation, AFCalender* calender) {
+	NSLog(@"Calender: %@", calender);
+	NSLog(@"Events: %@", calender.events);
+} failure:^(AFHTTPRequestOperation* operation, NSError* error) {
+	NSLog(@"Error: %@", error);
+}]
+
+AFHTTPClient* anyHttpClient = ...;
+[anyHttpClient enqueueHTTPRequestOperation:calenderOperation];
+```
 
 ## How to constribute
 
