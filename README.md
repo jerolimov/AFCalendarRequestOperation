@@ -1,4 +1,4 @@
-# AFCalenderClient
+# AFCalendarRequestOperation
 
 AFCalenderClient is a [AFNetworking](https://github.com/AFNetworking/AFNetworking)
 extension for downloading and parsing iCal calendars.
