@@ -39,9 +39,9 @@
 		599C238216AEAD00001E4F16 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 599C236F16AEAD00001E4F16 /* AFXMLRequestOperation.m */; };
 		599C238316AEAD00001E4F16 /* UIImageView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 599C237016AEAD00001E4F16 /* UIImageView+AFNetworking.h */; };
 		599C238416AEAD00001E4F16 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 599C237116AEAD00001E4F16 /* UIImageView+AFNetworking.m */; };
-		599C239716AEB04D001E4F16 /* AFCalenderOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 599C239516AEB04D001E4F16 /* AFCalenderOperation.h */; };
-		599C239816AEB04D001E4F16 /* AFCalenderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 599C239616AEB04D001E4F16 /* AFCalenderOperation.m */; };
-		599C239B16AEB0AA001E4F16 /* AFCalenderOperationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 599C239A16AEB0AA001E4F16 /* AFCalenderOperationTests.m */; };
+		599C239716AEB04D001E4F16 /* AFCalendarRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 599C239516AEB04D001E4F16 /* AFCalendarRequestOperation.h */; };
+		599C239816AEB04D001E4F16 /* AFCalendarRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 599C239616AEB04D001E4F16 /* AFCalendarRequestOperation.m */; };
+		599C239B16AEB0AA001E4F16 /* AFCalendarRequestOperationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 599C239A16AEB0AA001E4F16 /* AFCalendarRequestOperationTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,10 +97,10 @@
 		599C236F16AEAD00001E4F16 /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFXMLRequestOperation.m; sourceTree = "<group>"; };
 		599C237016AEAD00001E4F16 /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
 		599C237116AEAD00001E4F16 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
-		599C239516AEB04D001E4F16 /* AFCalenderOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFCalenderOperation.h; sourceTree = "<group>"; };
-		599C239616AEB04D001E4F16 /* AFCalenderOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFCalenderOperation.m; sourceTree = "<group>"; };
-		599C239916AEB0AA001E4F16 /* AFCalenderOperationTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFCalenderOperationTests.h; sourceTree = "<group>"; };
-		599C239A16AEB0AA001E4F16 /* AFCalenderOperationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFCalenderOperationTests.m; sourceTree = "<group>"; };
+		599C239516AEB04D001E4F16 /* AFCalendarRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFCalendarRequestOperation.h; sourceTree = "<group>"; };
+		599C239616AEB04D001E4F16 /* AFCalendarRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFCalendarRequestOperation.m; sourceTree = "<group>"; };
+		599C239916AEB0AA001E4F16 /* AFCalendarRequestOperationTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFCalendarRequestOperationTests.h; sourceTree = "<group>"; };
+		599C239A16AEB0AA001E4F16 /* AFCalendarRequestOperationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFCalendarRequestOperationTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,8 +176,8 @@
 				592FB26816B290F00039214C /* AFCalenderModel.m */,
 				599C230F16AEA8C1001E4F16 /* AFCalenderClient.h */,
 				599C231016AEA8C1001E4F16 /* AFCalenderClient.m */,
-				599C239516AEB04D001E4F16 /* AFCalenderOperation.h */,
-				599C239616AEB04D001E4F16 /* AFCalenderOperation.m */,
+				599C239516AEB04D001E4F16 /* AFCalendarRequestOperation.h */,
+				599C239616AEB04D001E4F16 /* AFCalendarRequestOperation.m */,
 				592FB24816B28D080039214C /* AFCalenderParser.h */,
 				592FB24916B28D080039214C /* AFCalenderParser.m */,
 			);
@@ -191,8 +191,8 @@
 				594BDF5516B4935900328E41 /* AFCalenderModelTests.m */,
 				599C232416AEA8C2001E4F16 /* AFCalenderClientTests.h */,
 				599C232516AEA8C2001E4F16 /* AFCalenderClientTests.m */,
-				599C239916AEB0AA001E4F16 /* AFCalenderOperationTests.h */,
-				599C239A16AEB0AA001E4F16 /* AFCalenderOperationTests.m */,
+				599C239916AEB0AA001E4F16 /* AFCalendarRequestOperationTests.h */,
+				599C239A16AEB0AA001E4F16 /* AFCalendarRequestOperationTests.m */,
 				592FB24D16B28D370039214C /* AFCalenderParserTests.h */,
 				592FB24E16B28D370039214C /* AFCalenderParserTests.m */,
 			);
@@ -243,7 +243,7 @@
 				599C237F16AEAD00001E4F16 /* AFURLConnectionOperation.h in Headers */,
 				599C238116AEAD00001E4F16 /* AFXMLRequestOperation.h in Headers */,
 				599C238316AEAD00001E4F16 /* UIImageView+AFNetworking.h in Headers */,
-				599C239716AEB04D001E4F16 /* AFCalenderOperation.h in Headers */,
+				599C239716AEB04D001E4F16 /* AFCalendarRequestOperation.h in Headers */,
 				592FB24A16B28D080039214C /* AFCalenderParser.h in Headers */,
 				592FB26516B2909A0039214C /* AFCalender.h in Headers */,
 				592FB26916B290F00039214C /* AFCalenderModel.h in Headers */,
@@ -357,7 +357,7 @@
 				599C238016AEAD00001E4F16 /* AFURLConnectionOperation.m in Sources */,
 				599C238216AEAD00001E4F16 /* AFXMLRequestOperation.m in Sources */,
 				599C238416AEAD00001E4F16 /* UIImageView+AFNetworking.m in Sources */,
-				599C239816AEB04D001E4F16 /* AFCalenderOperation.m in Sources */,
+				599C239816AEB04D001E4F16 /* AFCalendarRequestOperation.m in Sources */,
 				592FB24B16B28D080039214C /* AFCalenderParser.m in Sources */,
 				592FB26A16B290F00039214C /* AFCalenderModel.m in Sources */,
 			);
@@ -368,7 +368,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				599C232616AEA8C2001E4F16 /* AFCalenderClientTests.m in Sources */,
-				599C239B16AEB0AA001E4F16 /* AFCalenderOperationTests.m in Sources */,
+				599C239B16AEB0AA001E4F16 /* AFCalendarRequestOperationTests.m in Sources */,
 				592FB24F16B28D370039214C /* AFCalenderParserTests.m in Sources */,
 				594BDF5616B4935A00328E41 /* AFCalenderModelTests.m in Sources */,
 			);

@@ -18,13 +18,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "AFCalenderOperationTests.h"
+#import "AFCalendarRequestOperationTests.h"
 
 #import "AFHTTPClient.h"
 
-#import "AFCalenderOperation.h"
+#import "AFCalendarRequestOperation.h"
 
-@implementation AFCalenderOperationTests
+@implementation AFCalendarRequestOperationTests
 
 /**
  Test autodetection of the HTTPRequestOperation class based on the pat suffix
@@ -35,7 +35,7 @@
 	NSURLRequest* calenderRequest = [NSURLRequest requestWithURL:calenderUrl];
 	
 	dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-	AFCalenderOperation* operation = [[AFCalenderOperation alloc] initWithRequest:calenderRequest];
+	AFCalendarRequestOperation* operation = [[AFCalendarRequestOperation alloc] initWithRequest:calenderRequest];
 	operation.successCallbackQueue = queue;
 	operation.failureCallbackQueue = queue;
 	
@@ -62,7 +62,7 @@
 	NSURLRequest* calenderRequest = [NSURLRequest requestWithURL:calenderUrl];
 	
 	dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-	AFCalenderOperation* operation = [[AFCalenderOperation alloc] initWithRequest:calenderRequest];
+	AFCalendarRequestOperation* operation = [[AFCalendarRequestOperation alloc] initWithRequest:calenderRequest];
 	operation.successCallbackQueue = queue;
 	operation.failureCallbackQueue = queue;
 	

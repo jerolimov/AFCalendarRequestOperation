@@ -18,41 +18,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "AFCalenderOperation.h"
+#import "AFHTTPRequestOperation.h"
 
-#import "AFCalenderParser.h"
+#import "AFCalenderModel.h"
 
-@implementation AFCalenderOperation
+@interface AFCalendarRequestOperation : AFHTTPRequestOperation
 
-+ (NSSet *)acceptableContentTypes {
-	return [NSSet setWithObjects:@"text/calendar", nil];
-}
-
-+ (BOOL)canProcessRequest:(NSURLRequest *)request {
-	return [[[request URL] pathExtension] isEqualToString:@"ics"] || [super canProcessRequest:request];
-}
-
-- (void)setCompletionBlockWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-							  failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-retain-cycles"
-	self.completionBlock = ^{
-		if (self.error) {
-			if (failure) {
-				dispatch_async(self.failureCallbackQueue ?: dispatch_get_main_queue(), ^{
-					failure(self, self.error);
-				});
-			}
-		} else {
-			if (success) {
-				dispatch_async(self.successCallbackQueue ?: dispatch_get_main_queue(), ^{
-					_calender = [[[AFCalenderParser alloc] init] parse:self.responseString];
-					success(self, _calender);
-				});
-			}
-		}
-	};
-#pragma clang diagnostic pop
-}
+@property (strong) AFCalender* calender;
 
 @end
