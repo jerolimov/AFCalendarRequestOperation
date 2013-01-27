@@ -28,4 +28,8 @@
 // TODO add the events in a second step to the calendar!
 @property (strong) NSArray* responseCalendarEvents;
 
++ (instancetype)calendarRequestOperation:(NSURLRequest *)urlRequest
+								 success:(void (^)(NSURLRequest* request, NSHTTPURLResponse* response, EKCalendar* calendar, NSArray* events))success
+								 failure:(void (^)(NSURLRequest* request, NSHTTPURLResponse* response, NSError* error))failure;
+
 @end

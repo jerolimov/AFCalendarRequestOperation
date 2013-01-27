@@ -22,6 +22,8 @@
 
 #import "AFCalendarParser.h"
 
+#import <EventKit/EventKit.h>
+
 @implementation AFCalendarRequestOperation
 
 + (NSSet *)acceptableContentTypes {
@@ -30,6 +32,27 @@
 
 + (BOOL)canProcessRequest:(NSURLRequest *)request {
 	return [[[request URL] pathExtension] isEqualToString:@"ics"] || [super canProcessRequest:request];
+}
+
++ (instancetype)calendarRequestOperation:(NSURLRequest *)urlRequest
+								 success:(void (^)(NSURLRequest* request, NSHTTPURLResponse* response, EKCalendar* calendar, NSArray* events))success
+								 failure:(void (^)(NSURLRequest* request, NSHTTPURLResponse* response, NSError* error))failure {
+	AFCalendarRequestOperation *requestOperation = [(AFCalendarRequestOperation*)[self alloc] initWithRequest:urlRequest];
+	[requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation* operation, id responseObject) {
+		if (success) {
+			success(
+					operation.request,
+					operation.response,
+					[(AFCalendarRequestOperation *)operation responseCalendar],
+					[(AFCalendarRequestOperation *)operation responseCalendarEvents]);
+        }
+	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+		if (failure) {
+			failure(operation.request, operation.response, error);
+		}
+	}];
+	
+	return requestOperation;
 }
 
 - (void)setCompletionBlockWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
@@ -48,6 +71,8 @@
 				dispatch_async(self.successCallbackQueue ?: dispatch_get_main_queue(), ^{
 					AFCalendarParser* parser = [[AFCalendarParser alloc] init];
 					[parser parse:self.responseString];
+					_responseCalendar = parser.calendar;
+					_responseCalendarEvents = parser.events;
 					success(self, parser.calendar);
 				});
 			}

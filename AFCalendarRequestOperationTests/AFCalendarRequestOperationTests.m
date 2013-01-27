@@ -118,4 +118,56 @@
 	dispatch_sync(queue, ^{});
 }
 
+/**
+ Test autodetection of the HTTPRequestOperation class based on the pat suffix
+ ".ics".
+ */
+- (void) testGoogleGermanHolidayStaticCalendarOperation {
+	NSURL* calendarUrl = [NSURL URLWithString:@"https://www.google.com/calendar/ical/german__de%40holiday.calendar.google.com/public/basic.ics"];
+	NSURLRequest* calendarRequest = [NSURLRequest requestWithURL:calendarUrl];
+	
+	AFCalendarRequestOperation* operation = [AFCalendarRequestOperation calendarRequestOperation:calendarRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, EKCalendar *calendar, NSArray *events) {
+		// TODO assert the data
+	} failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+		STFail(@"Error: %@", error);
+	}];
+	
+	dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+	operation.successCallbackQueue = queue;
+	operation.failureCallbackQueue = queue;
+	
+	AFHTTPClient* client = [AFHTTPClient clientWithBaseURL:calendarUrl];
+	[client enqueueHTTPRequestOperation:operation];
+	// Wait until the the network code is finished.
+	[client.operationQueue waitUntilAllOperationsAreFinished];
+	// The we wait also "in sync" on the dispatch_async calls from the operation.
+	dispatch_sync(queue, ^{});
+}
+
+/**
+ Test if all other urls will also automatically use the AFCalendarOperation
+ because we set the Accept header to "text/calendar".
+ */
+- (void) testUniversityOfAppliedSciencesCologneStaticCalendarOperation {
+	NSURL* calendarUrl = [NSURL URLWithString:@"http://advbs06.gm.fh-koeln.de:8080/icalender/ical?sqlabfrage=null%20is%20null"];
+	NSURLRequest* calendarRequest = [NSURLRequest requestWithURL:calendarUrl];
+	
+	AFCalendarRequestOperation* operation = [AFCalendarRequestOperation calendarRequestOperation:calendarRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, EKCalendar *calendar, NSArray *events) {
+		// TODO assert the data
+	} failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+		STFail(@"Error: %@", error);
+	}];
+	
+	dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+	operation.successCallbackQueue = queue;
+	operation.failureCallbackQueue = queue;
+	
+	AFHTTPClient* client = [AFHTTPClient clientWithBaseURL:calendarUrl];
+	[client enqueueHTTPRequestOperation:operation];
+	// Wait until the the network code is finished.
+	[client.operationQueue waitUntilAllOperationsAreFinished];
+	// The we wait also "in sync" on the dispatch_async calls from the operation.
+	dispatch_sync(queue, ^{});
+}
+
 @end
