@@ -20,14 +20,14 @@
 
 #import "AFCalenderClient.h"
 
-#import "AFCalenderOperation.h"
+#import "AFCalendarRequestOperation.h"
 
 @implementation AFCalenderClient
 
 - (id)initWithBaseURL:(NSURL *)url {
 	self = [super initWithBaseURL:url];
 	if (self) {
-		[self registerHTTPOperationClass:[AFCalenderOperation class]];
+		[self registerHTTPOperationClass:[AFCalendarRequestOperation class]];
 		[self setDefaultHeader:@"Accept" value:@"text/calendar"];
 	}
 	return self;

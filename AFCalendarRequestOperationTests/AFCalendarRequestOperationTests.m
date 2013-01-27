@@ -40,7 +40,7 @@
 	operation.failureCallbackQueue = queue;
 	
 	[operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-		STAssertEqualObjects(NSStringFromClass([responseObject class]), NSStringFromClass(AFCalender.class), @"Unexpected class");
+		STAssertEqualObjects(NSStringFromClass([responseObject class]), NSStringFromClass(EKCalendar.class), @"Unexpected class");
 	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 		STFail(@"Error: %@", error);
 	}];
@@ -67,7 +67,7 @@
 	operation.failureCallbackQueue = queue;
 	
 	[operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-		STAssertEqualObjects(NSStringFromClass([responseObject class]), NSStringFromClass(AFCalender.class), @"Unexpected class");
+		STAssertEqualObjects(NSStringFromClass([responseObject class]), NSStringFromClass(EKCalendar.class), @"Unexpected class");
 	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 		STFail(@"Error: %@", error);
 	}];

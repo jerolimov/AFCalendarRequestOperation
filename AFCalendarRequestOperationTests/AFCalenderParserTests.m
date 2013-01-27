@@ -33,26 +33,28 @@
 	}
 
 	AFCalenderParser* parser = [[AFCalenderParser alloc] init];
-	AFCalender* calender = [parser parse:calenderContent];
+	[parser parse:calenderContent];
 	
-	STAssertEqualObjects(calender.providerId, @"-//Google Inc//Google Calendar 70.9054//EN", @"Unexpected value");
-	STAssertEqualObjects(calender.version, @"2.0", @"Unexpected value");
-	STAssertEqualObjects(calender.description, @"Deutsche Feiertage", @"Unexpected value");
-	STAssertEqualObjects(calender.timezone, @"UTC", @"Unexpected value");
+	EKCalendar* calendar = parser.calendar;
 	
-	STAssertEquals((NSUInteger) 43, calender.events.count, @"Unexpected event count");
+	//STAssertEqualObjects(calendar.providerId, @"-//Google Inc//Google Calendar 70.9054//EN", @"Unexpected value");
+	//STAssertEqualObjects(calendar.version, @"2.0", @"Unexpected value");
+	STAssertEqualObjects(calendar.title, @"Deutsche Feiertage", @"Unexpected value");
+	//STAssertEqualObjects(calendar.timezone, @"UTC", @"Unexpected value");
 	
-	AFCalenderEvent* event0 = [calender.events objectAtIndex:0];
+	STAssertEquals(parser.events.count, (NSUInteger) 43, @"Unexpected event count");
 	
-	STAssertTrue([event0.uid hasSuffix:@"@google.com"], @"Unexpected value");
-	STAssertTrue(event0.sequence, @"Unexpected value");
-	STAssertEqualObjects(event0.start, [NSDate dateWithString:@"2014-10-03 00:00:00 +0200"], @"Unexpected value");
-	STAssertEqualObjects(event0.end, [NSDate dateWithString:@"2014-10-04 00:00:00 +0200"], @"Unexpected value");
-	STAssertEqualObjects(event0.summery, @"Tag der deutschen Einheit", @"Unexpected value");
-	STAssertNil(event0.description, @"Unexpected value");
+	EKEvent* event0 = [parser.events objectAtIndex:0];
+	
+	//STAssertTrue([event0.uid hasSuffix:@"@google.com"], @"Unexpected value");
+	//STAssertTrue(event0.sequence, @"Unexpected value");
+	STAssertEqualObjects(event0.startDate, [NSDate dateWithString:@"2014-10-03 00:00:00 +0200"], @"Unexpected value");
+	STAssertEqualObjects(event0.endDate, [NSDate dateWithString:@"2014-10-04 00:00:00 +0200"], @"Unexpected value");
+	STAssertEqualObjects(event0.title, @"Tag der deutschen Einheit", @"Unexpected value");
+	STAssertNil(event0.notes, @"Unexpected value");
 	STAssertNil(event0.location, @"Unexpected value");
 	
-	STAssertEquals(event0.duration, (NSTimeInterval) 24 * 60 * 60, @"Unexpected value");
+	//STAssertEquals(event0.duration, (NSTimeInterval) 24 * 60 * 60, @"Unexpected value");
 }
 
 - (void) testUniversityOfAppliedSciencesCologneCalender {
@@ -65,26 +67,28 @@
 	}
 	
 	AFCalenderParser* parser = [[AFCalenderParser alloc] init];
-	AFCalender* calender = [parser parse:calenderContent];
+	[parser parse:calenderContent];
 	
-	STAssertEqualObjects(calender.providerId, @"-//fh-koeln.de/NONSGML QQ2-Stundenplan iCalendar Exporter V1.3.3//EN", @"Unexpected value");
-	STAssertEqualObjects(calender.version, @"2.0", @"Unexpected value");
-	STAssertNil(calender.description, @"Unexpected value");
-	STAssertNil(calender.timezone, @"Unexpected value");
+	EKCalendar* calendar = parser.calendar;
 	
-	STAssertEquals((NSUInteger) 2379, calender.events.count, @"Unexpected event count");
+	//STAssertEqualObjects(calendar.providerId, @"-//fh-koeln.de/NONSGML QQ2-Stundenplan iCalendar Exporter V1.3.3//EN", @"Unexpected value");
+	//STAssertEqualObjects(calendar.version, @"2.0", @"Unexpected value");
+	STAssertEqualObjects(calendar.title, @"", @"Unexpected value");
+	//STAssertNil(calendar.timezone, @"Unexpected value");
 	
-	AFCalenderEvent* event0 = [calender.events objectAtIndex:0];
+	STAssertEquals(parser.events.count, (NSUInteger) 2379, @"Unexpected event count");
 	
-	STAssertNotNil(event0.uid, @"Unexpected value");
-	STAssertEquals(event0.sequence, NO, @"Unexpected value");
-	STAssertEqualObjects(event0.start, [NSDate dateWithString:@"2013-01-29 16:00:00 +0100"], @"Unexpected value");
-	STAssertEqualObjects(event0.end, [NSDate dateWithString:@"2013-01-29 16:45:00 +0100"], @"Unexpected value");
-	STAssertEqualObjects(event0.summery, @"MA2 P", @"Unexpected value");
-	STAssertEqualObjects(event0.description, @"Mathematik 2\\n", @"Unexpected value");
+	EKEvent* event0 = [parser.events objectAtIndex:0];
+	
+	//STAssertNotNil(event0.uid, @"Unexpected value");
+	//STAssertEquals(event0.sequence, NO, @"Unexpected value");
+	STAssertEqualObjects(event0.startDate, [NSDate dateWithString:@"2013-01-29 16:00:00 +0100"], @"Unexpected value");
+	STAssertEqualObjects(event0.endDate, [NSDate dateWithString:@"2013-01-29 16:45:00 +0100"], @"Unexpected value");
+	STAssertEqualObjects(event0.title, @"MA2 P", @"Unexpected value");
+	STAssertEqualObjects(event0.notes, @"Mathematik 2\\n", @"Unexpected value");
 	STAssertEqualObjects(event0.location, @"null", @"Unexpected value"); // TODO fix
 	
-	STAssertEquals(event0.duration, (NSTimeInterval) 45 * 60, @"Unexpected value");
+	//STAssertEquals(event0.duration, (NSTimeInterval) 45 * 60, @"Unexpected value");
 }
 
 @end

@@ -46,8 +46,9 @@
 		} else {
 			if (success) {
 				dispatch_async(self.successCallbackQueue ?: dispatch_get_main_queue(), ^{
-					_calender = [[[AFCalenderParser alloc] init] parse:self.responseString];
-					success(self, _calender);
+					AFCalenderParser* parser = [[AFCalenderParser alloc] init];
+					[parser parse:self.responseString];
+					success(self, parser.calendar);
 				});
 			}
 		}

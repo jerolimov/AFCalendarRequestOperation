@@ -18,7 +18,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "AFCalenderModel.h"
 #import "AFCalenderClient.h"
 #import "AFCalenderOperation.h"
 #import "AFCalenderParser.h"

@@ -18,12 +18,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "AFHTTPRequestOperation.h"
+#import <EventKit/EventKit.h>
 
-#import "AFCalenderModel.h"
+#import "AFHTTPRequestOperation.h"
 
 @interface AFCalendarRequestOperation : AFHTTPRequestOperation
 
-@property (strong) AFCalender* calender;
+@property (strong) EKCalendar* responseCalendar;
+// TODO add the events in a second step to the calendar!
+@property (strong) NSArray* responseCalendarEvents;
 
 @end

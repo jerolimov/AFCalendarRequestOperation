@@ -20,10 +20,13 @@
 
 #import <Foundation/Foundation.h>
 
-#import "AFCalenderModel.h"
+#import <EventKit/EventKit.h>
 
 @interface AFCalenderParser : NSObject
 
-- (AFCalender*) parse: (NSString*) content;
+@property (strong) EKCalendar* calendar;
+@property (strong) NSMutableArray* events;
+
+- (void) parse: (NSString*) content;
 
 @end

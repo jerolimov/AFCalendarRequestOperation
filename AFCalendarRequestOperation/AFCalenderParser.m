@@ -21,13 +21,12 @@
 #import "AFCalenderParser.h"
 
 @implementation AFCalenderParser {
-	AFCalender* _calender;
-	AFCalenderEvent* _event;
+	EKEvent* _event;
 	// NSString or NSMutableString
 	id _lastLine;
 }
 
-- (AFCalender*) parse: (NSString*) content {
+- (void) parse: (NSString*) content {
 	[content enumerateLinesUsingBlock:^(NSString* line, BOOL* stop) {
 		if ([line hasPrefix:@" "]) {
 			if (![_lastLine isMemberOfClass:NSMutableString.class]) {
@@ -41,8 +40,6 @@
 			_lastLine = line;
 		}
 	}];
-	
-	return _calender;
 }
 
 /**
@@ -52,14 +49,15 @@
  */
 - (BOOL) parseLine: (NSString*) line {
 	if ([line isEqualToString:@"BEGIN:VCALENDAR"]) {
-		_calender = [[AFCalender alloc] init];
+		_calendar = [[EKCalendar alloc] init];
+		_events = [NSMutableArray array];
 		return NO;
 	} else if ([line isEqualToString:@"BEGIN:VEVENT"]) {
-		_event = [[AFCalenderEvent alloc] init];
+		_event = [[EKEvent alloc] init];
 		return NO;
 	} else if ([line isEqualToString:@"END:VEVENT"]) {
 		if (_event) {
-			[_calender.events addObject:_event];
+			[_events addObject:_event];
 			_event = nil;
 		}
 		return NO;
@@ -67,43 +65,43 @@
 		return YES;
 	}
 	
-	if (_calender && _event) {
+	if (_calendar && _event) {
 		[self parseEvent:line];
-	} else if (_calender) {
+	} else if (_calendar) {
 		[self parseCalender:line];
 	}
 	return NO;
 }
 
 - (void) parseCalender: (NSString*) line {
-	if ([line hasPrefix:@"PRODID:"]) {
-		_calender.providerId = [line substringFromIndex:@"PRODID:".length];
+	/*if ([line hasPrefix:@"PRODID:"]) {
+		_calendar.providerId = [line substringFromIndex:@"PRODID:".length];
 	} else if ([line hasPrefix:@"VERSION:"]) {
-		_calender.version = [line substringFromIndex:@"VERSION:".length];
-	} else if ([line hasPrefix:@"X-WR-CALDESC:"]) {
-		_calender.description = [line substringFromIndex:@"X-WR-CALDESC:".length];
-	} else if ([line hasPrefix:@"X-WR-TIMEZONE:"]) {
-		_calender.timezone = [line substringFromIndex:@"X-WR-TIMEZONE:".length];
-	} else {
+		_calendar.version = [line substringFromIndex:@"VERSION:".length];
+	} else*/ if ([line hasPrefix:@"X-WR-CALDESC:"]) {
+		_calendar.title = [line substringFromIndex:@"X-WR-CALDESC:".length];
+	}/* else if ([line hasPrefix:@"X-WR-TIMEZONE:"]) {
+		_calendar.timezone = [line substringFromIndex:@"X-WR-TIMEZONE:".length];
+	}*/ else {
 		//NSLog(@"Unsupported calender line: %@", line);
 	}
 }
 
 - (void) parseEvent: (NSString*) line {
-	if ([line hasPrefix:@"UID:"]) {
+	/*if ([line hasPrefix:@"UID:"]) {
 		_event.uid = [line substringFromIndex:@"UID:".length];
 	} else if ([line hasPrefix:@"SEQUENCE:"]) {
 		_event.sequence = [line isEqualToString:@"SEQUENCE:1"];
-	} else if ([line hasPrefix:@"DTSTART;"]) {
-		_event.start = [self parseEventDate:[line substringFromIndex:@"DTSTART;".length]];
+	} else*/ if ([line hasPrefix:@"DTSTART;"]) {
+		_event.startDate = [self parseEventDate:[line substringFromIndex:@"DTSTART;".length]];
 	} else if ([line hasPrefix:@"DTEND;"]) {
-		_event.end = [self parseEventDate:[line substringFromIndex:@"DTEND;".length]];
+		_event.endDate = [self parseEventDate:[line substringFromIndex:@"DTEND;".length]];
 	} else if ([line hasPrefix:@"LOCATION:"]) {
 		_event.location = [line substringFromIndex:@"LOCATION:".length];
 	} else if ([line hasPrefix:@"SUMMARY:"]) {
-		_event.summery = [line substringFromIndex:@"SUMMARY:".length];
+		_event.title = [line substringFromIndex:@"SUMMARY:".length];
 	} else if ([line hasPrefix:@"DESCRIPTION:"]) {
-		_event.description = [line substringFromIndex:@"DESCRIPTION:".length];
+		_event.notes = [line substringFromIndex:@"DESCRIPTION:".length];
 	} else if ([line hasPrefix:@"LOCATION:"]) {
 		_event.location = [line substringFromIndex:@"LOCATION:".length];
 	} else {

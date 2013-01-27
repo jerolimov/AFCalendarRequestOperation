@@ -23,7 +23,7 @@
 #import "AFHTTPRequestOperation.h"
 
 #import "AFCalenderClient.h"
-#import "AFCalenderOperation.h"
+#import "AFCalendarRequestOperation.h"
 
 @implementation AFCalenderClientTests
 
@@ -40,7 +40,7 @@
 	
 	AFHTTPRequestOperation* operation = [client HTTPRequestOperationWithRequest:request success:nil failure:nil];
 	
-	STAssertEqualObjects(NSStringFromClass(operation.class), NSStringFromClass(AFCalenderOperation.class), @"Unexpected class");
+	STAssertEqualObjects(NSStringFromClass(operation.class), NSStringFromClass(AFCalendarRequestOperation.class), @"Unexpected class");
 }
 
 /**
@@ -56,7 +56,7 @@
 	
 	AFHTTPRequestOperation* operation = [client HTTPRequestOperationWithRequest:request success:nil failure:nil];
 	
-	STAssertEqualObjects(NSStringFromClass(operation.class), NSStringFromClass(AFCalenderOperation.class), @"Unexpected class");
+	STAssertEqualObjects(NSStringFromClass(operation.class), NSStringFromClass(AFCalendarRequestOperation.class), @"Unexpected class");
 }
 
 @end
