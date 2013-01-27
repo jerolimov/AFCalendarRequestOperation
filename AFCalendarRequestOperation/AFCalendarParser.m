@@ -18,9 +18,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "AFCalenderParser.h"
+#import "AFCalendarParser.h"
 
-@implementation AFCalenderParser {
+@implementation AFCalendarParser {
 	EKEvent* _event;
 	// NSString or NSMutableString
 	id _lastLine;
@@ -43,9 +43,9 @@
 }
 
 /**
- Parse a "multiline" of a calender file.
+ Parse a "multiline" of a calendar file.
  
- @return YES if the parsing is successfully finished (end of calender is reached).
+ @return YES if the parsing is successfully finished (end of calendar is reached).
  */
 - (BOOL) parseLine: (NSString*) line {
 	if ([line isEqualToString:@"BEGIN:VCALENDAR"]) {
@@ -68,12 +68,12 @@
 	if (_calendar && _event) {
 		[self parseEvent:line];
 	} else if (_calendar) {
-		[self parseCalender:line];
+		[self parseCalendar:line];
 	}
 	return NO;
 }
 
-- (void) parseCalender: (NSString*) line {
+- (void) parseCalendar: (NSString*) line {
 	/*if ([line hasPrefix:@"PRODID:"]) {
 		_calendar.providerId = [line substringFromIndex:@"PRODID:".length];
 	} else if ([line hasPrefix:@"VERSION:"]) {
@@ -83,7 +83,7 @@
 	}/* else if ([line hasPrefix:@"X-WR-TIMEZONE:"]) {
 		_calendar.timezone = [line substringFromIndex:@"X-WR-TIMEZONE:".length];
 	}*/ else {
-		//NSLog(@"Unsupported calender line: %@", line);
+		//NSLog(@"Unsupported calendar line: %@", line);
 	}
 }
 

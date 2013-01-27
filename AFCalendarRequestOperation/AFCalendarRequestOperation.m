@@ -20,7 +20,7 @@
 
 #import "AFCalendarRequestOperation.h"
 
-#import "AFCalenderParser.h"
+#import "AFCalendarParser.h"
 
 @implementation AFCalendarRequestOperation
 
@@ -46,7 +46,7 @@
 		} else {
 			if (success) {
 				dispatch_async(self.successCallbackQueue ?: dispatch_get_main_queue(), ^{
-					AFCalenderParser* parser = [[AFCalenderParser alloc] init];
+					AFCalendarParser* parser = [[AFCalendarParser alloc] init];
 					[parser parse:self.responseString];
 					success(self, parser.calendar);
 				});

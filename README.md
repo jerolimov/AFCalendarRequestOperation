@@ -1,45 +1,45 @@
 # AFCalendarRequestOperation
 
-AFCalenderClient is a [AFNetworking](https://github.com/AFNetworking/AFNetworking)
+AFCalendarRequestOperation is a [AFNetworking](https://github.com/AFNetworking/AFNetworking)
 extension for downloading and parsing iCal calendars.
 
-## Usage with AFCalenderClient (extends AFHTTPClient)
+## REMOVED!! Usage with AFCalendarClient (extends AFHTTPClient)
 
 ``` objective-c
-AFHTTPClient* calenderClient = [[AFCalenderClient alloc] initWithBaseURL:[NSURL URLWithString:@"https://www.google.com/calendar"]];
-NSURLRequest* calenderRequest = [client requestWithMethod:@"GET" path:@"ical/german__de%40holiday.calendar.google.com/public/basic.ics" parameters:nil];
+AFHTTPClient* calendarClient = [[AFCalendarClient alloc] initWithBaseURL:[NSURL URLWithString:@"https://www.google.com/calendar"]];
+NSURLRequest* calendarRequest = [client requestWithMethod:@"GET" path:@"ical/german__de%40holiday.calendar.google.com/public/basic.ics" parameters:nil];
 
-AFHTTPRequestOperation* calenderOperation = [calenderClient HTTPRequestOperationWithRequest:calenderRequest success:^(AFHTTPRequestOperation* operation, AFCalender* calender) {
-	NSLog(@"Calender: %@", calender);
-	NSLog(@"Events: %@", calender.events);
+AFHTTPRequestOperation* calendarOperation = [calendarClient HTTPRequestOperationWithRequest:calendarRequest success:^(AFHTTPRequestOperation* operation, AFCalendar* calendar) {
+	NSLog(@"Calendar: %@", calendar);
+	NSLog(@"Events: %@", calendar.events);
 } failure:^(AFHTTPRequestOperation* operation, NSError* error) {
 	NSLog(@"Error: %@", error);
 }]
-[calenderClient enqueueHTTPRequestOperation:calenderOperation];
+[calendarClient enqueueHTTPRequestOperation:calendarOperation];
 ```
 
-## Use AFHTTPClient and AFCalenderOperation directly
+## Use AFHTTPClient and AFCalendarOperation directly
 
 ``` objective-c
-NSURL* calendereUrl = [NSURL URLWithString:@"https://www.google.com/calendar/ical/german__de%40holiday.calendar.google.com/public/basic.ics"];
-NSURLRequest* calenderRequest = [NSURLRequest requestWithURL:calenderUrl];
+NSURL* calendareUrl = [NSURL URLWithString:@"https://www.google.com/calendar/ical/german__de%40holiday.calendar.google.com/public/basic.ics"];
+NSURLRequest* calendarRequest = [NSURLRequest requestWithURL:calendarUrl];
 
-AFCalenderOperation* operation = [[AFCalenderOperation alloc] initWithRequest:calenderRequest];
-[operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation* operation, AFCalender* calender) {
-	NSLog(@"Calender: %@", calender);
-	NSLog(@"Events: %@", calender.events);
+AFCalendarOperation* operation = [[AFCalendarOperation alloc] initWithRequest:calendarRequest];
+[operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation* operation, AFCalendar* calendar) {
+	NSLog(@"Calendar: %@", calendar);
+	NSLog(@"Events: %@", calendar.events);
 } failure:^(AFHTTPRequestOperation* operation, NSError* error) {
 	NSLog(@"Error: %@", error);
 }]
 
 AFHTTPClient* anyHttpClient = ...;
-[anyHttpClient enqueueHTTPRequestOperation:calenderOperation];
+[anyHttpClient enqueueHTTPRequestOperation:calendarOperation];
 ```
 
 ## Status
 
-* General calender parsing into a simple model, see AFCalenderModel.h
-  If you want read another calender format please constribute it or add an issue for that.
+* General calendar parsing into a simple model, see AFCalendarModel.h
+  If you want read another calendar format please constribute it or add an issue for that.
 * Parsing of different date formats into NSDate
 * Unit tests for all classes
 
@@ -54,10 +54,10 @@ Open todos:
 * Fix or extend the code with the contain test classes.
 * Add your commit under MIT license to an issue or pull request.
 
-    git clone --recursive git@github.com:jerolimov/AFCalenderClient.git
+    git clone --recursive git@github.com:jerolimov/AFCalendarRequestOperation.git
 
 ## License
 
-AFCalenderClient extension is available under the MIT license,
+AFCalendarRequestOperation extension is available under the MIT license,
 like [AFNetworking](https://github.com/AFNetworking/AFNetworking) itself.
 Read the LICENSE.txt file for more details.

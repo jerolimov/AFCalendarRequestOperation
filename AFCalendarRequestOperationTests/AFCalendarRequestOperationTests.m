@@ -30,12 +30,50 @@
  Test autodetection of the HTTPRequestOperation class based on the pat suffix
  ".ics".
  */
-- (void) testGoogleGermanHolidayCalenderOperation {
-	NSURL* calenderUrl = [NSURL URLWithString:@"https://www.google.com/calendar/ical/german__de%40holiday.calendar.google.com/public/basic.ics"];
-	NSURLRequest* calenderRequest = [NSURLRequest requestWithURL:calenderUrl];
+- (void) testGoogleGermanHolidayCalendarUrl {
+	NSURL* calendarBaseUrl = [NSURL URLWithString:@"https://www.google.com/calendar"];
+	AFHTTPClient* client = [AFHTTPClient clientWithBaseURL:calendarBaseUrl];
+	[client registerHTTPOperationClass:[AFCalendarRequestOperation class]];
+	[client setDefaultHeader:@"Accept" value:@"text/calendar"];
+	
+	NSURLRequest* request = [client requestWithMethod:@"GET"
+												 path:@"ical/german__de%40holiday.calendar.google.com/public/basic.ics"
+										   parameters:nil];
+	
+	AFHTTPRequestOperation* operation = [client HTTPRequestOperationWithRequest:request success:nil failure:nil];
+	
+	STAssertEqualObjects(NSStringFromClass(operation.class), NSStringFromClass(AFCalendarRequestOperation.class), @"Unexpected class");
+}
+
+/**
+ Test if all other urls will also automatically use the AFCalendarOperation
+ because we set the Accept header to "text/calendar".
+ */
+- (void) testUniversityOfAppliedSciencesCologneCalendarUrl {
+	NSURL* calendarBaseUrl = [NSURL URLWithString:@"http://advbs06.gm.fh-koeln.de:8080/icalender"];
+	AFHTTPClient* client = [AFHTTPClient clientWithBaseURL:calendarBaseUrl];
+	[client registerHTTPOperationClass:[AFCalendarRequestOperation class]];
+	[client setDefaultHeader:@"Accept" value:@"text/calendar"];
+	
+	NSURLRequest* request = [client requestWithMethod:@"GET"
+												 path:@"ical"
+										   parameters:@{ @"sqlabfrage": @"null is null" }];
+	
+	AFHTTPRequestOperation* operation = [client HTTPRequestOperationWithRequest:request success:nil failure:nil];
+	
+	STAssertEqualObjects(NSStringFromClass(operation.class), NSStringFromClass(AFCalendarRequestOperation.class), @"Unexpected class");
+}
+
+/**
+ Test autodetection of the HTTPRequestOperation class based on the pat suffix
+ ".ics".
+ */
+- (void) testGoogleGermanHolidayCalendarOperation {
+	NSURL* calendarUrl = [NSURL URLWithString:@"https://www.google.com/calendar/ical/german__de%40holiday.calendar.google.com/public/basic.ics"];
+	NSURLRequest* calendarRequest = [NSURLRequest requestWithURL:calendarUrl];
 	
 	dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-	AFCalendarRequestOperation* operation = [[AFCalendarRequestOperation alloc] initWithRequest:calenderRequest];
+	AFCalendarRequestOperation* operation = [[AFCalendarRequestOperation alloc] initWithRequest:calendarRequest];
 	operation.successCallbackQueue = queue;
 	operation.failureCallbackQueue = queue;
 	
@@ -45,7 +83,7 @@
 		STFail(@"Error: %@", error);
 	}];
 	
-	AFHTTPClient* client = [AFHTTPClient clientWithBaseURL:calenderUrl];
+	AFHTTPClient* client = [AFHTTPClient clientWithBaseURL:calendarUrl];
 	[client enqueueHTTPRequestOperation:operation];
 	// Wait until the the network code is finished.
 	[client.operationQueue waitUntilAllOperationsAreFinished];
@@ -54,15 +92,15 @@
 }
 
 /**
- Test if all other urls will also automatically use the AFCalenderOperation
- because we set the Accept header to "text/calender".
+ Test if all other urls will also automatically use the AFCalendarOperation
+ because we set the Accept header to "text/calendar".
  */
-- (void) testUniversityOfAppliedSciencesCologneCalenderOperation {
-	NSURL* calenderUrl = [NSURL URLWithString:@"http://advbs06.gm.fh-koeln.de:8080/icalender/ical?sqlabfrage=null%20is%20null"];
-	NSURLRequest* calenderRequest = [NSURLRequest requestWithURL:calenderUrl];
+- (void) testUniversityOfAppliedSciencesCologneCalendarOperation {
+	NSURL* calendarUrl = [NSURL URLWithString:@"http://advbs06.gm.fh-koeln.de:8080/icalender/ical?sqlabfrage=null%20is%20null"];
+	NSURLRequest* calendarRequest = [NSURLRequest requestWithURL:calendarUrl];
 	
 	dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-	AFCalendarRequestOperation* operation = [[AFCalendarRequestOperation alloc] initWithRequest:calenderRequest];
+	AFCalendarRequestOperation* operation = [[AFCalendarRequestOperation alloc] initWithRequest:calendarRequest];
 	operation.successCallbackQueue = queue;
 	operation.failureCallbackQueue = queue;
 	
@@ -72,7 +110,7 @@
 		STFail(@"Error: %@", error);
 	}];
 	
-	AFHTTPClient* client = [AFHTTPClient clientWithBaseURL:calenderUrl];
+	AFHTTPClient* client = [AFHTTPClient clientWithBaseURL:calendarUrl];
 	[client enqueueHTTPRequestOperation:operation];
 	// Wait until the the network code is finished.
 	[client.operationQueue waitUntilAllOperationsAreFinished];

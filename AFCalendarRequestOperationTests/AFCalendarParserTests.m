@@ -18,22 +18,22 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "AFCalenderParserTests.h"
+#import "AFCalendarParserTests.h"
 
-#import "AFCalenderParser.h"
+#import "AFCalendarParser.h"
 
-@implementation AFCalenderParserTests
+@implementation AFCalendarParserTests
 
-- (void) testGoogleGermanHolidayCalender {
-	NSURL* calenderUrl = [NSURL URLWithString:@"https://www.google.com/calendar/ical/german__de%40holiday.calendar.google.com/public/basic.ics"];
+- (void) testGoogleGermanHolidayCalendar {
+	NSURL* calendarUrl = [NSURL URLWithString:@"https://www.google.com/calendar/ical/german__de%40holiday.calendar.google.com/public/basic.ics"];
 	NSError* error;
-	NSString* calenderContent = [NSString stringWithContentsOfURL:calenderUrl encoding:NSUTF8StringEncoding error:&error];
+	NSString* calendarContent = [NSString stringWithContentsOfURL:calendarUrl encoding:NSUTF8StringEncoding error:&error];
 	if (error) {
 		STFail(@"Error: %@", error);
 	}
 
-	AFCalenderParser* parser = [[AFCalenderParser alloc] init];
-	[parser parse:calenderContent];
+	AFCalendarParser* parser = [[AFCalendarParser alloc] init];
+	[parser parse:calendarContent];
 	
 	EKCalendar* calendar = parser.calendar;
 	
@@ -57,17 +57,17 @@
 	//STAssertEquals(event0.duration, (NSTimeInterval) 24 * 60 * 60, @"Unexpected value");
 }
 
-- (void) testUniversityOfAppliedSciencesCologneCalender {
-	NSURL* calenderUrl = [NSURL URLWithString:@"http://advbs06.gm.fh-koeln.de:8080/icalender/ical/?sqlabfrage=null%20is%20null"];
-	NSLog(@"url: %@", calenderUrl);
+- (void) testUniversityOfAppliedSciencesCologneCalendar {
+	NSURL* calendarUrl = [NSURL URLWithString:@"http://advbs06.gm.fh-koeln.de:8080/icalender/ical/?sqlabfrage=null%20is%20null"];
+	NSLog(@"url: %@", calendarUrl);
 	NSError* error;
-	NSString* calenderContent = [NSString stringWithContentsOfURL:calenderUrl encoding:NSASCIIStringEncoding error:&error];
+	NSString* calendarContent = [NSString stringWithContentsOfURL:calendarUrl encoding:NSASCIIStringEncoding error:&error];
 	if (error) {
 		STFail(@"Error: %@", error);
 	}
 	
-	AFCalenderParser* parser = [[AFCalenderParser alloc] init];
-	[parser parse:calenderContent];
+	AFCalendarParser* parser = [[AFCalendarParser alloc] init];
+	[parser parse:calendarContent];
 	
 	EKCalendar* calendar = parser.calendar;
 	

@@ -9,16 +9,13 @@
 /* Begin PBXBuildFile section */
 		590E39A616B5D3ED0080545A /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 590E39A316B5D3D50080545A /* EventKit.framework */; };
 		590E39A716B5D40A0080545A /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 590E39A316B5D3D50080545A /* EventKit.framework */; };
-		592FB24A16B28D080039214C /* AFCalenderParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 592FB24816B28D080039214C /* AFCalenderParser.h */; };
-		592FB24B16B28D080039214C /* AFCalenderParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 592FB24916B28D080039214C /* AFCalenderParser.m */; };
-		592FB24F16B28D370039214C /* AFCalenderParserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 592FB24E16B28D370039214C /* AFCalenderParserTests.m */; };
-		592FB26516B2909A0039214C /* AFCalender.h in Headers */ = {isa = PBXBuildFile; fileRef = 592FB26316B2909A0039214C /* AFCalender.h */; };
+		592FB24A16B28D080039214C /* AFCalendarParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 592FB24816B28D080039214C /* AFCalendarParser.h */; };
+		592FB24B16B28D080039214C /* AFCalendarParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 592FB24916B28D080039214C /* AFCalendarParser.m */; };
+		592FB24F16B28D370039214C /* AFCalendarParserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 592FB24E16B28D370039214C /* AFCalendarParserTests.m */; };
 		599C230716AEA8C1001E4F16 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 599C230616AEA8C1001E4F16 /* Cocoa.framework */; };
-		599C231116AEA8C1001E4F16 /* AFCalenderClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 599C231016AEA8C1001E4F16 /* AFCalenderClient.m */; };
 		599C231916AEA8C2001E4F16 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 599C231816AEA8C2001E4F16 /* SenTestingKit.framework */; };
 		599C231A16AEA8C2001E4F16 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 599C230616AEA8C1001E4F16 /* Cocoa.framework */; };
 		599C231D16AEA8C2001E4F16 /* AFCalendarRequestOperation.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 599C230316AEA8C1001E4F16 /* AFCalendarRequestOperation.dylib */; };
-		599C232616AEA8C2001E4F16 /* AFCalenderClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 599C232516AEA8C2001E4F16 /* AFCalenderClientTests.m */; };
 		599C237216AEAD00001E4F16 /* AFHTTPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 599C235F16AEAD00001E4F16 /* AFHTTPClient.h */; };
 		599C237316AEAD00001E4F16 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 599C236016AEAD00001E4F16 /* AFHTTPClient.m */; };
 		599C237416AEAD00001E4F16 /* AFHTTPRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 599C236116AEAD00001E4F16 /* AFHTTPRequestOperation.h */; };
@@ -55,23 +52,18 @@
 
 /* Begin PBXFileReference section */
 		590E39A316B5D3D50080545A /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
-		592FB24816B28D080039214C /* AFCalenderParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFCalenderParser.h; sourceTree = "<group>"; };
-		592FB24916B28D080039214C /* AFCalenderParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFCalenderParser.m; sourceTree = "<group>"; };
-		592FB24D16B28D370039214C /* AFCalenderParserTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFCalenderParserTests.h; sourceTree = "<group>"; };
-		592FB24E16B28D370039214C /* AFCalenderParserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFCalenderParserTests.m; sourceTree = "<group>"; };
-		592FB26316B2909A0039214C /* AFCalender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFCalender.h; sourceTree = "<group>"; };
+		592FB24816B28D080039214C /* AFCalendarParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFCalendarParser.h; sourceTree = "<group>"; };
+		592FB24916B28D080039214C /* AFCalendarParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFCalendarParser.m; sourceTree = "<group>"; };
+		592FB24D16B28D370039214C /* AFCalendarParserTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFCalendarParserTests.h; sourceTree = "<group>"; };
+		592FB24E16B28D370039214C /* AFCalendarParserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFCalendarParserTests.m; sourceTree = "<group>"; };
 		594BDF2716B2DFBB00328E41 /* AFCalendarRequestOperation.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = AFCalendarRequestOperation.podspec; sourceTree = "<group>"; };
 		599C230316AEA8C1001E4F16 /* AFCalendarRequestOperation.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = AFCalendarRequestOperation.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		599C230616AEA8C1001E4F16 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		599C230916AEA8C1001E4F16 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		599C230A16AEA8C1001E4F16 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		599C230B16AEA8C1001E4F16 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		599C230F16AEA8C1001E4F16 /* AFCalenderClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFCalenderClient.h; sourceTree = "<group>"; };
-		599C231016AEA8C1001E4F16 /* AFCalenderClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFCalenderClient.m; sourceTree = "<group>"; };
 		599C231716AEA8C2001E4F16 /* AFCalendarRequestOperationTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AFCalendarRequestOperationTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		599C231816AEA8C2001E4F16 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		599C232416AEA8C2001E4F16 /* AFCalenderClientTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFCalenderClientTests.h; sourceTree = "<group>"; };
-		599C232516AEA8C2001E4F16 /* AFCalenderClientTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFCalenderClientTests.m; sourceTree = "<group>"; };
 		599C233816AEAB10001E4F16 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		599C233A16AEAB17001E4F16 /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		599C235F16AEAD00001E4F16 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
@@ -170,13 +162,10 @@
 		599C230C16AEA8C1001E4F16 /* AFCalendarRequestOperation */ = {
 			isa = PBXGroup;
 			children = (
-				592FB26316B2909A0039214C /* AFCalender.h */,
-				599C230F16AEA8C1001E4F16 /* AFCalenderClient.h */,
-				599C231016AEA8C1001E4F16 /* AFCalenderClient.m */,
 				599C239516AEB04D001E4F16 /* AFCalendarRequestOperation.h */,
 				599C239616AEB04D001E4F16 /* AFCalendarRequestOperation.m */,
-				592FB24816B28D080039214C /* AFCalenderParser.h */,
-				592FB24916B28D080039214C /* AFCalenderParser.m */,
+				592FB24816B28D080039214C /* AFCalendarParser.h */,
+				592FB24916B28D080039214C /* AFCalendarParser.m */,
 			);
 			path = AFCalendarRequestOperation;
 			sourceTree = "<group>";
@@ -184,12 +173,10 @@
 		599C231E16AEA8C2001E4F16 /* AFCalendarRequestOperationTests */ = {
 			isa = PBXGroup;
 			children = (
-				599C232416AEA8C2001E4F16 /* AFCalenderClientTests.h */,
-				599C232516AEA8C2001E4F16 /* AFCalenderClientTests.m */,
 				599C239916AEB0AA001E4F16 /* AFCalendarRequestOperationTests.h */,
 				599C239A16AEB0AA001E4F16 /* AFCalendarRequestOperationTests.m */,
-				592FB24D16B28D370039214C /* AFCalenderParserTests.h */,
-				592FB24E16B28D370039214C /* AFCalenderParserTests.m */,
+				592FB24D16B28D370039214C /* AFCalendarParserTests.h */,
+				592FB24E16B28D370039214C /* AFCalendarParserTests.m */,
 			);
 			path = AFCalendarRequestOperationTests;
 			sourceTree = "<group>";
@@ -239,8 +226,7 @@
 				599C238116AEAD00001E4F16 /* AFXMLRequestOperation.h in Headers */,
 				599C238316AEAD00001E4F16 /* UIImageView+AFNetworking.h in Headers */,
 				599C239716AEB04D001E4F16 /* AFCalendarRequestOperation.h in Headers */,
-				592FB24A16B28D080039214C /* AFCalenderParser.h in Headers */,
-				592FB26516B2909A0039214C /* AFCalender.h in Headers */,
+				592FB24A16B28D080039214C /* AFCalendarParser.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,7 +327,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				599C231116AEA8C1001E4F16 /* AFCalenderClient.m in Sources */,
 				599C237316AEAD00001E4F16 /* AFHTTPClient.m in Sources */,
 				599C237516AEAD00001E4F16 /* AFHTTPRequestOperation.m in Sources */,
 				599C237716AEAD00001E4F16 /* AFImageRequestOperation.m in Sources */,
@@ -352,7 +337,7 @@
 				599C238216AEAD00001E4F16 /* AFXMLRequestOperation.m in Sources */,
 				599C238416AEAD00001E4F16 /* UIImageView+AFNetworking.m in Sources */,
 				599C239816AEB04D001E4F16 /* AFCalendarRequestOperation.m in Sources */,
-				592FB24B16B28D080039214C /* AFCalenderParser.m in Sources */,
+				592FB24B16B28D080039214C /* AFCalendarParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,9 +345,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				599C232616AEA8C2001E4F16 /* AFCalenderClientTests.m in Sources */,
 				599C239B16AEB0AA001E4F16 /* AFCalendarRequestOperationTests.m in Sources */,
-				592FB24F16B28D370039214C /* AFCalenderParserTests.m in Sources */,
+				592FB24F16B28D370039214C /* AFCalendarParserTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

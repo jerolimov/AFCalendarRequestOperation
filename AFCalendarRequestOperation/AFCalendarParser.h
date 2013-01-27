@@ -18,14 +18,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "AFHTTPClient.h"
+#import <Foundation/Foundation.h>
 
-@interface AFCalenderClient : AFHTTPClient
+#import <EventKit/EventKit.h>
 
-/**
- Call super init method, register the AFCalenderOperation and set the default
- "Accept" header to "text/calender".
- */
-- (id)initWithBaseURL:(NSURL *)url;
+@interface AFCalendarParser : NSObject
+
+@property (strong) EKCalendar* calendar;
+@property (strong) NSMutableArray* events;
+
+- (void) parse: (NSString*) content;
 
 @end

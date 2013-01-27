@@ -18,6 +18,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "AFCalenderClient.h"
-#import "AFCalenderOperation.h"
-#import "AFCalenderParser.h"
+#import <SenTestingKit/SenTestingKit.h>
+
+@interface AFCalendarParserTests : SenTestCase
+
+@end
