@@ -33,14 +33,14 @@
 	}
 
 	AFCalendarParser* parser = [[AFCalendarParser alloc] init];
+	parser.calendar = [[EKCalendar alloc] init];
+	
 	[parser parse:calendarContent];
 	
-	EKCalendar* calendar = parser.calendar;
-	
-	//STAssertEqualObjects(calendar.providerId, @"-//Google Inc//Google Calendar 70.9054//EN", @"Unexpected value");
-	//STAssertEqualObjects(calendar.version, @"2.0", @"Unexpected value");
-	STAssertEqualObjects(calendar.title, @"Deutsche Feiertage", @"Unexpected value");
-	//STAssertEqualObjects(calendar.timezone, @"UTC", @"Unexpected value");
+	//STAssertEqualObjects(parser.calendar.providerId, @"-//Google Inc//Google Calendar 70.9054//EN", @"Unexpected value");
+	//STAssertEqualObjects(parser.calendar.version, @"2.0", @"Unexpected value");
+	STAssertEqualObjects(parser.calendar.title, @"Deutsche Feiertage", @"Unexpected value");
+	//STAssertEqualObjects(parser.calendar.timezone, @"UTC", @"Unexpected value");
 	
 	STAssertEquals(parser.events.count, (NSUInteger) 43, @"Unexpected event count");
 	
@@ -67,14 +67,14 @@
 	}
 	
 	AFCalendarParser* parser = [[AFCalendarParser alloc] init];
+	parser.calendar = [[EKCalendar alloc] init];
+	
 	[parser parse:calendarContent];
 	
-	EKCalendar* calendar = parser.calendar;
-	
-	//STAssertEqualObjects(calendar.providerId, @"-//fh-koeln.de/NONSGML QQ2-Stundenplan iCalendar Exporter V1.3.3//EN", @"Unexpected value");
-	//STAssertEqualObjects(calendar.version, @"2.0", @"Unexpected value");
-	STAssertEqualObjects(calendar.title, @"", @"Unexpected value");
-	//STAssertNil(calendar.timezone, @"Unexpected value");
+	//STAssertEqualObjects(parser.calendar.providerId, @"-//fh-koeln.de/NONSGML QQ2-Stundenplan iCalendar Exporter V1.3.3//EN", @"Unexpected value");
+	//STAssertEqualObjects(parser.calendar.version, @"2.0", @"Unexpected value");
+	STAssertEqualObjects(parser.calendar.title, @"", @"Unexpected value");
+	//STAssertNil(parser.calendar.timezone, @"Unexpected value");
 	
 	STAssertEquals(parser.events.count, (NSUInteger) 2379, @"Unexpected event count");
 	

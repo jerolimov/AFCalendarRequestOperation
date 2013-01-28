@@ -22,10 +22,16 @@
 
 #import <EventKit/EventKit.h>
 
+/**
+ Calendar parser parse a list of events to the events array.
+ 
+ Requires that an event store or a calendar instance is already set.
+ */
 @interface AFCalendarParser : NSObject
 
+@property (strong) EKEventStore* store;
 @property (strong) EKCalendar* calendar;
-@property (strong) NSMutableArray* events;
+@property (readonly) NSMutableArray* events;
 
 - (void) parse: (NSString*) content;
 

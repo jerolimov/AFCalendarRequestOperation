@@ -24,12 +24,21 @@
 
 @interface AFCalendarRequestOperation : AFHTTPRequestOperation
 
-@property (strong) EKCalendar* responseCalendar;
-// TODO add the events in a second step to the calendar!
-@property (strong) NSArray* responseCalendarEvents;
+@property (readonly) EKCalendar* responseCalendar;
+@property (readonly) NSArray* responseEvents;
 
-+ (instancetype)calendarRequestOperation:(NSURLRequest *)urlRequest
-								 success:(void (^)(NSURLRequest* request, NSHTTPURLResponse* response, EKCalendar* calendar, NSArray* events))success
-								 failure:(void (^)(NSURLRequest* request, NSHTTPURLResponse* response, NSError* error))failure;
++ (instancetype)calendarRequestOperationWithRequest:(NSURLRequest*) urlRequest
+											success:(void (^)(NSURLRequest* request, NSHTTPURLResponse* response, EKCalendar* calendar, NSArray* events))success
+											failure:(void (^)(NSURLRequest* request, NSHTTPURLResponse* response, NSError* error))failure;
+
++ (instancetype)calendarRequestOperationWithRequest:(NSURLRequest*) urlRequest
+									  andEventStore:(EKEventStore*) store
+											success:(void (^)(NSURLRequest* request, NSHTTPURLResponse* response, EKCalendar* calendar, NSArray* events))success
+											failure:(void (^)(NSURLRequest* request, NSHTTPURLResponse* response, NSError* error))failure;
+
++ (instancetype)calendarRequestOperationWithRequest:(NSURLRequest*) urlRequest
+										andCalendar:(EKCalendar*) calendar
+											success:(void (^)(NSURLRequest* request, NSHTTPURLResponse* response, EKCalendar* calendar, NSArray* events))success
+											failure:(void (^)(NSURLRequest* request, NSHTTPURLResponse* response, NSError* error))failure;
 
 @end

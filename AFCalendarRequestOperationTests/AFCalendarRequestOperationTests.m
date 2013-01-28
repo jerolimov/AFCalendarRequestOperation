@@ -126,7 +126,7 @@
 	NSURL* calendarUrl = [NSURL URLWithString:@"https://www.google.com/calendar/ical/german__de%40holiday.calendar.google.com/public/basic.ics"];
 	NSURLRequest* calendarRequest = [NSURLRequest requestWithURL:calendarUrl];
 	
-	AFCalendarRequestOperation* operation = [AFCalendarRequestOperation calendarRequestOperation:calendarRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, EKCalendar *calendar, NSArray *events) {
+	AFCalendarRequestOperation* operation = [AFCalendarRequestOperation calendarRequestOperationWithRequest:calendarRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, EKCalendar *calendar, NSArray *events) {
 		// TODO assert the data
 	} failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
 		STFail(@"Error: %@", error);
@@ -152,7 +152,7 @@
 	NSURL* calendarUrl = [NSURL URLWithString:@"http://advbs06.gm.fh-koeln.de:8080/icalender/ical?sqlabfrage=null%20is%20null"];
 	NSURLRequest* calendarRequest = [NSURLRequest requestWithURL:calendarUrl];
 	
-	AFCalendarRequestOperation* operation = [AFCalendarRequestOperation calendarRequestOperation:calendarRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, EKCalendar *calendar, NSArray *events) {
+	AFCalendarRequestOperation* operation = [AFCalendarRequestOperation calendarRequestOperationWithRequest:calendarRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, EKCalendar *calendar, NSArray *events) {
 		// TODO assert the data
 	} failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
 		STFail(@"Error: %@", error);
