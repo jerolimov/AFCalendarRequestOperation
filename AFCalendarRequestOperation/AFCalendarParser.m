@@ -52,7 +52,7 @@
 		_events = [NSMutableArray array];
 		return NO;
 	} else if ([line isEqualToString:@"BEGIN:VEVENT"]) {
-		_currentEvent = [[EKEvent alloc] init];
+		_currentEvent = [EKEvent eventWithEventStore:_store];
 		return NO;
 	} else if ([line isEqualToString:@"END:VEVENT"]) {
 		if (_currentEvent) {
