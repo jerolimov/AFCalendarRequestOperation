@@ -37,8 +37,8 @@
 }
 
 + (instancetype)calendarRequestOperationWithRequest:(NSURLRequest*) urlRequest
-											success:(void (^)(NSURLRequest* request, NSHTTPURLResponse* response, EKCalendar* calendar, NSArray* events))success
-											failure:(void (^)(NSURLRequest* request, NSHTTPURLResponse* response, NSError* error))failure {
+											success:(void (^)(AFCalendarRequestOperation* operation))success
+											failure:(void (^)(AFCalendarRequestOperation* operation, NSError* error))failure {
 	AFCalendarRequestOperation* operation = [(AFCalendarRequestOperation*)[self alloc] initWithRequest:urlRequest];
 	[operation setFullCompletionBlockWithSuccess:success failure:failure];
 	return operation;
@@ -46,8 +46,8 @@
 
 + (instancetype)calendarRequestOperationWithRequest:(NSURLRequest*) urlRequest
 									  andEventStore:(EKEventStore*) store
-											success:(void (^)(NSURLRequest* request, NSHTTPURLResponse* response, EKCalendar* calendar, NSArray* events))success
-											failure:(void (^)(NSURLRequest* request, NSHTTPURLResponse* response, NSError* error))failure {
+											success:(void (^)(AFCalendarRequestOperation* operation))success
+											failure:(void (^)(AFCalendarRequestOperation* operation, NSError* error))failure {
 	AFCalendarRequestOperation* operation = [(AFCalendarRequestOperation*)[self alloc] initWithRequest:urlRequest];
 	AFCalendarParser* parser = [operation parser];
 	parser.store = store;
@@ -57,8 +57,8 @@
 
 + (instancetype)calendarRequestOperationWithRequest:(NSURLRequest*) urlRequest
 										andCalendar:(EKCalendar*) calendar
-											success:(void (^)(NSURLRequest* request, NSHTTPURLResponse* response, EKCalendar* calendar, NSArray* events))success
-											failure:(void (^)(NSURLRequest* request, NSHTTPURLResponse* response, NSError* error))failure {
+											success:(void (^)(AFCalendarRequestOperation* operation))success
+											failure:(void (^)(AFCalendarRequestOperation* operation, NSError* error))failure {
 	AFCalendarRequestOperation* operation = [(AFCalendarRequestOperation*)[self alloc] initWithRequest:urlRequest];
 	AFCalendarParser* parser = [operation parser];
 	parser.calendar = calendar;
@@ -109,22 +109,22 @@
 #pragma clang diagnostic pop
 }
 
-- (void)setFullCompletionBlockWithSuccess:(void (^)(NSURLRequest* request, NSHTTPURLResponse* response, EKCalendar* calendar, NSArray* events))success
-								  failure:(void (^)(NSURLRequest* request, NSHTTPURLResponse* response, NSError* error))failure {
+- (void)setFullCompletionBlockWithSuccess:(void (^)(AFCalendarRequestOperation* operation))success
+								  failure:(void (^)(AFCalendarRequestOperation* operation, NSError* error))failure {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-retain-cycles"
 	self.completionBlock = ^{
 		if (self.error) {
 			if (failure) {
 				dispatch_async(self.failureCallbackQueue ?: dispatch_get_main_queue(), ^{
-					failure(self.request, self.response, self.error);
+					failure(self, self.error);
 				});
 			}
 		} else {
 			if (success) {
 				dispatch_async(self.successCallbackQueue ?: dispatch_get_main_queue(), ^{
 					[_parser parse:self.responseString];
-					success(self.request, self.response, _parser.calendar, _parser.events);
+					success(self);
 				});
 			}
 		}

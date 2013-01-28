@@ -28,17 +28,17 @@
 @property (readonly) NSArray* responseEvents;
 
 + (instancetype)calendarRequestOperationWithRequest:(NSURLRequest*) urlRequest
-											success:(void (^)(NSURLRequest* request, NSHTTPURLResponse* response, EKCalendar* calendar, NSArray* events))success
-											failure:(void (^)(NSURLRequest* request, NSHTTPURLResponse* response, NSError* error))failure;
+											success:(void (^)(AFCalendarRequestOperation* operation))success
+											failure:(void (^)(AFCalendarRequestOperation* operation, NSError* error))failure;
 
 + (instancetype)calendarRequestOperationWithRequest:(NSURLRequest*) urlRequest
 									  andEventStore:(EKEventStore*) store
-											success:(void (^)(NSURLRequest* request, NSHTTPURLResponse* response, EKCalendar* calendar, NSArray* events))success
-											failure:(void (^)(NSURLRequest* request, NSHTTPURLResponse* response, NSError* error))failure;
+											success:(void (^)(AFCalendarRequestOperation* operation))success
+											failure:(void (^)(AFCalendarRequestOperation* operation, NSError* error))failure;
 
 + (instancetype)calendarRequestOperationWithRequest:(NSURLRequest*) urlRequest
 										andCalendar:(EKCalendar*) calendar
-											success:(void (^)(NSURLRequest* request, NSHTTPURLResponse* response, EKCalendar* calendar, NSArray* events))success
-											failure:(void (^)(NSURLRequest* request, NSHTTPURLResponse* response, NSError* error))failure;
+											success:(void (^)(AFCalendarRequestOperation* operation))success
+											failure:(void (^)(AFCalendarRequestOperation* operation, NSError* error))failure;
 
 @end
