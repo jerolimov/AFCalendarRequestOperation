@@ -84,23 +84,21 @@
 		return;
 	}
 		
-	/*if ([line hasPrefix:@"VERSION:"]) {
-		_calendar.version = [line substringFromIndex:@"VERSION:".length];
-	} else*/ if ([line hasPrefix:@"X-WR-CALDESC:"]) {
+	if ([line hasPrefix:@"X-WR-CALDESC:"]) {
 		_calendar.title = [line substringFromIndex:@"X-WR-CALDESC:".length];
-	}/* else if ([line hasPrefix:@"X-WR-TIMEZONE:"]) {
-		_calendar.timezone = [line substringFromIndex:@"X-WR-TIMEZONE:".length];
-	}*/ else {
-		//NSLog(@"Unsupported calendar line: %@", line);
 	}
 }
 
+/**
+ SUMMARY:BWL2 V
+ DESCRIPTION:Betriebswirtschaftslehre 2 (Inf)\n
+ LOCATION:0401
+ RRULE:FREQ=WEEKLY;INTERVAL=1;UNTIL=20130712T000000;BYDAY=TH;WKST=MO
+ DTSTART;TZID="Europe/Berlin":20130321T130000
+ DTEND;TZID="Europe/Berlin":20130321T134500
+ */
 - (void) parseEvent: (NSString*) line {
-	/*if ([line hasPrefix:@"UID:"]) {
-		_currentEvent.uid = [line substringFromIndex:@"UID:".length];
-	} else if ([line hasPrefix:@"SEQUENCE:"]) {
-		_currentEvent.sequence = [line isEqualToString:@"SEQUENCE:1"];
-	} else*/ if ([line hasPrefix:@"DTSTART;"]) {
+	if ([line hasPrefix:@"DTSTART;"]) {
 		_currentEvent.startDate = [self parseEventDate:[line substringFromIndex:@"DTSTART;".length]];
 	} else if ([line hasPrefix:@"DTEND;"]) {
 		_currentEvent.endDate = [self parseEventDate:[line substringFromIndex:@"DTEND;".length]];
@@ -110,10 +108,6 @@
 		_currentEvent.title = [line substringFromIndex:@"SUMMARY:".length];
 	} else if ([line hasPrefix:@"DESCRIPTION:"]) {
 		_currentEvent.notes = [line substringFromIndex:@"DESCRIPTION:".length];
-	} else if ([line hasPrefix:@"LOCATION:"]) {
-		_currentEvent.location = [line substringFromIndex:@"LOCATION:".length];
-	} else {
-		//NSLog(@"Unsupported event line: %@", line);
 	}
 }
 
