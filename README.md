@@ -3,7 +3,9 @@
 AFCalendarRequestOperation is a [AFNetworking](https://github.com/AFNetworking/AFNetworking)
 extension for downloading and parsing iCal calendars.
 
-## REMOVED!! Usage with AFCalendarClient (extends AFHTTPClient)
+## Work in process API
+
+## Configure AFHTTPClient to use AFCalendarRequestOperation automatically
 
 ``` objective-c
 AFHTTPClient* calendarClient = [[AFCalendarClient alloc] initWithBaseURL:[NSURL URLWithString:@"https://www.google.com/calendar"]];
@@ -18,7 +20,7 @@ AFHTTPRequestOperation* calendarOperation = [calendarClient HTTPRequestOperation
 [calendarClient enqueueHTTPRequestOperation:calendarOperation];
 ```
 
-## Use AFHTTPClient and AFCalendarOperation directly
+## Use AFHTTPClient and use AFCalendarRequestOperation manually
 
 ``` objective-c
 NSURL* calendareUrl = [NSURL URLWithString:@"https://www.google.com/calendar/ical/german__de%40holiday.calendar.google.com/public/basic.ics"];
