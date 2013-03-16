@@ -44,7 +44,7 @@
 
 /**
  Parse a "multiline" of a calendar file.
- 
+
  @return YES if the parsing is successfully finished (end of calendar is reached).
  */
 - (BOOL) parseLine: (NSString*) line {
@@ -53,17 +53,24 @@
 		return NO;
 	} else if ([line isEqualToString:@"BEGIN:VEVENT"]) {
 		_currentEvent = [EKEvent eventWithEventStore:_store];
+		_currentEvent.calendar = _calendar;
 		return NO;
 	} else if ([line isEqualToString:@"END:VEVENT"]) {
 		if (_currentEvent) {
+			// TODO: Outsourcen
 			[_events addObject:_currentEvent];
+			NSError *error = nil;
+			BOOL result = [_store saveEvent:_currentEvent span:EKSpanThisEvent commit:YES error:&error];
+			if (!result) {
+				NSLog(@"Error: %@", error);
+			}
 			_currentEvent = nil;
 		}
 		return NO;
 	} else if ([line isEqualToString:@"END:VCALENDAR"]) {
 		return YES;
 	}
-	
+
 	if (_currentEvent) {
 		[self parseEvent:line];
 	} else {
@@ -77,15 +84,15 @@
 		// Create or load a new event store for the given calendar identifier.
 		if (_store && !_calendar) {
 			_calendar = [_store calendarWithIdentifier:[line substringFromIndex:@"PRODID:".length]];
+
+			if ([line hasPrefix:@"X-WR-CALDESC:"]) {
+				_calendar.title = [line substringFromIndex:@"X-WR-CALDESC:".length];
+			}
 		}
 	}
-	
+
 	if (!_calendar) {
 		return;
-	}
-		
-	if ([line hasPrefix:@"X-WR-CALDESC:"]) {
-		_calendar.title = [line substringFromIndex:@"X-WR-CALDESC:".length];
 	}
 }
 
@@ -117,9 +124,9 @@
  */
 - (NSDate*) parseEventDate: (NSString*) date {
 	NSString* format = @"yyyyMMdd'T'HHmmss";
-	
+
 	NSRange delimiter = [date rangeOfString:@":" options:NSBackwardsSearch];
-	
+
 	for (NSString* keyValue in [[date substringToIndex:delimiter.location] componentsSeparatedByString:@";"]) {
 		NSRange delimiter2 = [keyValue rangeOfString:@"="];
 		NSString* key = [keyValue substringToIndex:delimiter2.location];
@@ -128,12 +135,12 @@
 			format = @"yyyyMMdd";
 		}
 	}
-	
+
 	NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
 	dateFormatter.dateFormat = format;
 	//dateFormatter.timeZone = ...
 	NSDate* result = [dateFormatter dateFromString:[date substringFromIndex:delimiter.location + delimiter.length]];
-	
+
 	//NSLog(@"parsed: %@ with: %@ result: %@", [date substringFromIndex:delimiter.location + delimiter.length], format, result);
 	return result;
 }

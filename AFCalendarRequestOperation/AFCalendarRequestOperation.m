@@ -66,6 +66,19 @@
 	return operation;
 }
 
++ (instancetype)calendarRequestOperationWithRequest:(NSURLRequest*) urlRequest
+									  andEventStore:(EKEventStore*) store
+										andCalendar:(EKCalendar*) calendar
+											success:(void (^)(AFCalendarRequestOperation* operation))success
+											failure:(void (^)(AFCalendarRequestOperation* operation, NSError* error))failure {
+	AFCalendarRequestOperation* operation = [(AFCalendarRequestOperation*)[self alloc] initWithRequest:urlRequest];
+	AFCalendarParser* parser = [operation parser];
+	parser.store = store;
+	parser.calendar = calendar;
+	[operation setFullCompletionBlockWithSuccess:success failure:failure];
+	return operation;
+}
+
 - (id)initWithRequest:(NSURLRequest *)urlRequest {
     self = [super initWithRequest:urlRequest];
     if (self) {
