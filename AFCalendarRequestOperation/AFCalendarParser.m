@@ -163,21 +163,31 @@
 	}
 
 	// Interval
-	NSString *interval = [self getRuleByKey:@"INTERVAL" inComponents:ruleComponents];
+	NSInteger *interval = [[self getRuleByKey:@"INTERVAL" inComponents:ruleComponents] intValue];
+	if (interval <= 0)
+		interval = 1;
 
 	// End
-	NSDate *end = [self parseEventDate:[self getRuleByKey:@"UNTIL" inComponents:ruleComponents]];
-	EKRecurrenceEnd * recurrenceEnd = [EKRecurrenceEnd recurrenceEndWithEndDate:end];
+	NSString *end = [self getRuleByKey:@"UNTIL" inComponents:ruleComponents];
+	EKRecurrenceEnd * recurrenceEnd;
+	if (end != nil) {
+		NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+		dateFormatter.dateFormat = @"yyyyMMdd'T'HHmmss";
+		NSDate *endDate = [dateFormatter dateFromString:end];
+		recurrenceEnd = [EKRecurrenceEnd recurrenceEndWithEndDate:endDate];
+	} else {
+		recurrenceEnd = nil;
+	}
 
 	// The rule
 	EKRecurrenceRule * recurrenceRule = [[EKRecurrenceRule alloc]
-										 initRecurrenceWithFrequency:recurrenceFrequency
-										 interval:[interval intValue]
-										 end:recurrenceEnd];
+						initRecurrenceWithFrequency:recurrenceFrequency
+						interval:interval
+						end:recurrenceEnd];
+	
 
-	NSArray *recurrenceRules;
-	[recurrenceRules arrayByAddingObject:recurrenceRule];
-
+	NSMutableArray *recurrenceRules = [[NSMutableArray alloc] init];
+	[recurrenceRules addObject:recurrenceRule];
 	return recurrenceRules;
 }
 

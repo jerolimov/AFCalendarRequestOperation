@@ -73,10 +73,48 @@ END:VCALENDAR";
 	parser.calendar = [[EKCalendar alloc] init];
 	[parser parse:calendarContent];
 	EKEvent* event0 = [parser.events objectAtIndex:0];
-	STAssertEqualObjects(event0.title, @"ST1 P", @"Unexpected value: title");
-	STAssertEqualObjects(event0.notes, @"Softwaretechnik 1\\n", @"Unexpected value: notes");
-	STAssertEqualObjects(event0.startDate, [NSDate dateWithString:@"2013-03-18 17:00:00 +0100"], @"Unexpected value");
-	STAssertEqualObjects(event0.endDate, [NSDate dateWithString:@"2013-03-18 17:45:00 +0100"], @"Unexpected value");
+	STAssertEqualObjects(event0.title, @"ST1 P", @"Unexpected title");
+	STAssertEqualObjects(event0.notes, @"Softwaretechnik 1\\n", @"Unexpected notes");
+	STAssertEqualObjects(event0.startDate, [NSDate dateWithString:@"2013-03-18 17:00:00 +0100"], @"Unexpected start date");
+	STAssertEqualObjects(event0.endDate, [NSDate dateWithString:@"2013-03-18 17:45:00 +0100"], @"Unexpected end date");
+	STAssertNotNil(event0.recurrenceRules, @"Unexpected value");
+	EKRecurrenceRule *rule = [[event0 recurrenceRules] objectAtIndex:0];
+	STAssertEquals(rule.interval, (NSInteger) 1, @"Unexpected rule interval");
+	STAssertEquals(rule.frequency, EKRecurrenceFrequencyWeekly, @"Unexpected rule frequency");
+	STAssertEqualObjects([rule.recurrenceEnd endDate], [NSDate dateWithString:@"2013-07-12 00:00:00 +0200"], @"Unexpected rule end");
+}
+
+- (void) testBirthdayEventEntry {
+	NSString* calendarContent = @"BEGIN:VCALENDAR\n\
+BEGIN:VEVENT\n\
+DTSTART;VALUE=DATE:20121122\n\
+DTEND;VALUE=DATE:20121123\n\
+RRULE:FREQ=YEARLY;WKST=MO\n\
+DTSTAMP:20130316T150319Z\n\
+UID:55ntc316ckalnubmd88hflud8s@google.com\n\
+CREATED:20121123T091805Z\n\
+DESCRIPTION:\n\
+LAST-MODIFIED:20121123T091805Z\n\
+LOCATION:\n\
+SEQUENCE:0\n\
+STATUS:CONFIRMED\n\
+SUMMARY:Ingo Geburtstag\n\
+TRANSP:OPAQUE\n\
+END:VEVENT\n\
+END:VCALENDAR";
+
+	AFCalendarParser* parser = [[AFCalendarParser alloc] init];
+	parser.calendar = [[EKCalendar alloc] init];
+	[parser parse:calendarContent];
+	EKEvent* event0 = [parser.events objectAtIndex:0];
+	STAssertEqualObjects(event0.title, @"Ingo Geburtstag", @"Unexpected title");
+	STAssertEqualObjects(event0.notes, @"", @"Unexpected notes");
+	STAssertEqualObjects(event0.startDate, [NSDate dateWithString:@"2012-11-22 00:00:00 +0100"], @"Unexpected start date");
+	STAssertEqualObjects(event0.endDate, [NSDate dateWithString:@"2012-11-23 00:00:00 +0100"], @"Unexpected end date");
+	STAssertNotNil(event0.recurrenceRules, @"Unexpected value");
+	EKRecurrenceRule *rule = [[event0 recurrenceRules] objectAtIndex:0];
+	STAssertEquals(rule.interval, (NSInteger) 1, @"Unexpected rule interval");
+	STAssertEquals(rule.frequency, EKRecurrenceFrequencyYearly, @"Unexpected rule frequency");
 }
 
 @end
