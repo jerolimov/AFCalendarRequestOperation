@@ -108,6 +108,8 @@
 		_currentEvent.title = [line substringFromIndex:@"SUMMARY:".length];
 	} else if ([line hasPrefix:@"DESCRIPTION:"]) {
 		_currentEvent.notes = [line substringFromIndex:@"DESCRIPTION:".length];
+	} else if ([line hasPrefix:@"RRULE:"]) {
+		_currentEvent.recurrenceRules = [self parseRecurrenceRules:[line substringFromIndex:@"RRULE:".length]];
 	}
 }
 
@@ -128,7 +130,7 @@
 			format = @"yyyyMMdd";
 		}
 	}
-	
+
 	NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
 	dateFormatter.dateFormat = format;
 	//dateFormatter.timeZone = ...
@@ -136,6 +138,59 @@
 	
 	//NSLog(@"parsed: %@ with: %@ result: %@", [date substringFromIndex:delimiter.location + delimiter.length], format, result);
 	return result;
+}
+
+/**
+ RRULE:FREQ=WEEKLY;INTERVAL=1;UNTIL=20130712T000000;BYDAY=MO;WKST=MO
+ RRULE:FREQ=YEARLY;WKST=MO
+ */
+- (NSArray*) parseRecurrenceRules: (NSString*) rules {
+	NSArray *ruleComponents = [rules componentsSeparatedByString:@";"];
+
+	// Frequency
+	NSString *frequency = [self getRuleByKey:@"FREQ" inComponents:ruleComponents];
+	EKRecurrenceFrequency recurrenceFrequency;
+	if ([frequency isEqualToString: @"DAILY"]) {
+		recurrenceFrequency = EKRecurrenceFrequencyDaily;
+	} else if ([frequency isEqualToString: @"WEEKLY"]) {
+		recurrenceFrequency = EKRecurrenceFrequencyWeekly;
+	} else if ([frequency isEqualToString: @"MONTHLY"]) {
+		recurrenceFrequency = EKRecurrenceFrequencyMonthly;
+	} else if ([frequency isEqualToString: @"YEARLY"]) {
+		recurrenceFrequency = EKRecurrenceFrequencyYearly;
+	} else {
+		return nil;
+	}
+
+	// Interval
+	NSString *interval = [self getRuleByKey:@"INTERVAL" inComponents:ruleComponents];
+
+	// End
+	NSDate *end = [self parseEventDate:[self getRuleByKey:@"UNTIL" inComponents:ruleComponents]];
+	EKRecurrenceEnd * recurrenceEnd = [EKRecurrenceEnd recurrenceEndWithEndDate:end];
+
+	// The rule
+	EKRecurrenceRule * recurrenceRule = [[EKRecurrenceRule alloc]
+										 initRecurrenceWithFrequency:recurrenceFrequency
+										 interval:[interval intValue]
+										 end:recurrenceEnd];
+
+	NSArray *recurrenceRules;
+	[recurrenceRules arrayByAddingObject:recurrenceRule];
+
+	return recurrenceRules;
+}
+
+- (NSString*) getRuleByKey: (NSString*) searchKey inComponents: (NSArray *)ruleComponents {
+	for (NSString *rule in ruleComponents) {
+		NSRange delimiter = [rule rangeOfString:@"="];
+		NSString* key = [rule substringToIndex:delimiter.location];
+
+		if ( [key isEqualToString:searchKey])
+			return[rule substringFromIndex:delimiter.location + delimiter.length];
+	}
+
+	return nil;
 }
 
 @end
